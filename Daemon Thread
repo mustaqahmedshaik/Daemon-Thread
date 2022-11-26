@@ -1,0 +1,89 @@
+class MSWord extends Thread
+{
+    public void run()
+    {
+        Thread t=Thread.currentThread();
+        String name=t.getName();
+		if(name.equals("TYPE"))
+		{
+			typing();
+		}
+		else if(name.equals("CHECK"))
+		{
+			spellchecking();
+		}
+		else
+		{
+			autosaving();
+		}
+	}
+	public void typing()
+	{
+		try 
+		{
+		    for(int i=1;i<=5;i++)
+		    {
+			    System.out.println("Typing.....");
+			    Thread.sleep(2000);
+		    }
+		}
+		catch(Exception e)
+		{
+			System.out.println("Typing Interrupted");
+		}
+	}
+
+	public void spellchecking()
+	{
+		try    
+		{
+		    for(;;)
+	    	{
+			    System.out.println("Spellchecking.....");
+			    Thread.sleep(2000);
+		    }
+		}
+		catch(Exception e)
+		{
+			System.out.println("Spellchecking Interrupted");
+		}
+	}
+	public void autosaving()
+	{
+		try 
+		{
+		    for(;;)
+		    {
+			    System.out.println("Autosaving.....");
+			    Thread.sleep(2000);
+		    }
+		}
+		catch(Exception e)
+		{
+			System.out.println("Autochecking Interrupted");
+		}
+	}
+}
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+       MSWord w1=new MSWord();
+       MSWord w2=new MSWord();
+       MSWord w3=new MSWord();
+
+       w1.setName("TYPE");
+       w2.setName("CHECK");
+       w3.setName("SAVE");
+
+       w2.setDaemon(true);
+       w3.setDaemon(true);
+
+       w2.setPriority(4);
+       w3.setPriority(3);
+
+       w1.start();
+       w2.start();
+       w3.start();
+	}
+}
